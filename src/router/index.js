@@ -6,9 +6,10 @@ Vue.use(VueRouter)
 const routes = [
   { path: '/', redirect: '/home'},
   { path: '/home', name: 'home', component: () => import('@/views/Home/Home.vue'),
-    meta: { isRecord: true, top: 0 } },
+    meta: { isRecord: true, top: 0 }, },
   { path: '/search', name: 'search', component: () => import('@/views/Search/Sear.vue') },
-  { path: '/user', name: 'user', component: () => import('@/views/User/User.vue') }
+  { path: '/user', name: 'user', component: () => import('@/views/User/User.vue') },
+  { path: '/list/:id', name: 'bookList', component: () => import ('@/views/List/BookList.vue'), props: true }
 ]
 
 const router = new VueRouter({

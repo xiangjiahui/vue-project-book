@@ -14,25 +14,17 @@
           v-model="slide"
           :interval="3000"
       >
-        <b-carousel-slide v-for="(item,index) in list"
-            :key="index" :caption="item.name" :img-src="item.path" :img-alt="item.name">
-        </b-carousel-slide>
+        <a v-for="(item,index) in imagesList" :href="item.href">
+          <b-carousel-slide
+              :key="index" :caption="item.name" :img-src="item.path" :img-alt="item.name">
+          </b-carousel-slide>
+        </a>
+
       </b-carousel>
     </div>
 
     <div id="book-manage">
-      <van-row>
-        <van-col span="12" class="book-common split-right split-bottom">常规</van-col>
-        <van-col span="12" class="book-love split-bottom">纯爱</van-col>
-      </van-row>
-      <van-row>
-        <van-col span="12" class="book-ntr split-right split-bottom">牛头人</van-col>
-        <van-col span="12" class="book-fl split-bottom">飞卢</van-col>
-      </van-row>
-      <van-row>
-        <van-col span="12" class="book-light split-right split-bottom">轻小说</van-col>
-        <van-col span="12" class="book-original split-bottom">原创</van-col>
-      </van-row>
+      <Manage :rows="rows"></Manage>
     </div>
   </div>
 </template>
@@ -41,19 +33,42 @@
 // 第一种方式导入图片
 import bg1 from '@/assets/images/bg1.png';
 import _ from 'lodash';
+import {getCityAPI} from '@/api/city/city-api';
+import Manage from '@/components/Manage/Manage.vue';
+
 let fn = null;
 export default {
   name: "Home",
+  components: {
+    Manage
+  },
   data() {
     return {
       slide: 0,
       sliding: null,
-      list: [
-        { name: '樱花动漫', path: bg1 },
+      imagesList: [
+        { name: '樱花动漫', path: bg1, href: 'http://www.yinghuacd.com/' },
           // 第二种方式导入图片
-        { name: 'AGE动漫', path: require('@/assets/images/bg2.png'), src: 'https://www.yinghuacd.com/' },
-        { name: 'MX动漫',  path: require('@/assets/images/bg3.jpg') },
-        { name: '动漫岛',  path: require('@/assets/images/bg3.jpg') },
+        { name: 'AGE动漫', path: require('@/assets/images/bg2.png'), href: 'https://rentry.org/agefans' },
+        { name: 'MX动漫',  path: require('@/assets/images/bg3.jpg'), href: 'http://www.mxdm.tv' },
+        { name: '动漫岛',  path: require('@/assets/images/bg3.jpg'), href: 'http://www.dmd8.com/' },
+      ],
+      rows: [
+        { cols: [
+            { title: '常规书籍', toPath: '/list/common', id: 'common'},
+            { title: '纯爱书籍', toPath: '/list/love', id: 'love'}
+          ]
+        },
+        { cols: [
+            { title: '牛头人书籍', toPath: '/list/ntr', id: 'ntr'},
+            { title: '轻小说书籍', toPath: '/list/light-novel', id: 'light-novel'}
+          ]
+        },
+        { cols: [
+            { title: '废卢书籍', toPath: '/list/feilu', id: 'feilu'},
+            { title: '书籍上传', toPath: '/upload', id: 'upload'},
+          ]
+        }
       ]
     }
   },
@@ -63,6 +78,10 @@ export default {
       return _.debounce( () => {
         this.$route.meta.top = window.scrollY;
       },50,{ trailing: true });
+    },
+    async getCity() {
+      const { data: res } = await getCityAPI();
+      console.log(res.info.city);
     }
   },
   // 组件被缓存时的激活周期函数
@@ -83,11 +102,5 @@ export default {
 }
 #book-manage {
   height: 200px;
-}
-.split-right {
-  border-right: 1px solid #dddddd;
-}
-.split-bottom {
-  border-bottom: 1px solid #dddddd;
 }
 </style>

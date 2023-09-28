@@ -10,6 +10,7 @@ module.exports = defineConfig({
   transpileDependencies: true,
   // 配置这个是为了打包后再本地通过file协议也能正常访问页面
   publicPath: './',
+  // 按需导入vant组件
   configureWebpack: {
     plugins: [
       ComponentsPlugin({
@@ -30,6 +31,7 @@ module.exports = defineConfig({
       },
     },
   },
+  // bootstrap-vue组件的配置
   chainWebpack: config => {
     config.resolve.alias.set(
         'vue$',
