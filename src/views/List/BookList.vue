@@ -13,22 +13,60 @@
       </template>
     </van-nav-bar>
 
-    <div class="bookList">
-      <!-- onLoad方法要想被触发,loading值必须是false -->
+    <van-sticky :offset-top="46">
+      <div class="list-area">
+        <p style="font-size: 20px;margin-bottom: 0">常规分区</p>
+      </div>
+    </van-sticky>
+
+    <van-sticky :offset-top="81">
+      <div class="head-tag">
+        <van-row>
+          <van-col span="5">名称</van-col>
+          <van-col span="5">用户</van-col>
+          <van-col span="5">时间</van-col>
+          <van-col span="5">分类</van-col>
+          <van-col span="4">下载</van-col>
+        </van-row>
+      </div>
+    </van-sticky>
+
+
+    <!-- onLoad方法要想被触发,loading值必须是false -->
+    <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
       <van-list
           v-model="loading"
           :finished="finished"
           finished-text="没有更多的数据了"
           @load="onLoad"
       >
-        <van-cell v-for="(item,index) in cityList" :key="index" :title="item.name" />
+        <div class="bookList">
+          <div class="book" v-for="(item,index) in books" :key="index">
+            <van-row>
+              <van-col span="5">
+                <router-link to="/detail">牧神记</router-link>
+              </van-col>
+              <van-col span="5">admin</van-col>
+              <van-col span="5">20230929</van-col>
+              <van-col span="5">
+                <van-tag type="success">常规</van-tag>
+              </van-col>
+              <van-col span="4">
+                <van-tag color="#ffe1e1" text-color="#ad0000">999999</van-tag>
+              </van-col>
+            </van-row>
+            <van-divider
+                :style="{ color: '#1989fa', borderColor: '#C0C0C0' }"
+            >
+            </van-divider>
+          </div>
+        </div>
       </van-list>
-    </div>
+    </van-pull-refresh>
   </div>
 </template>
 
 <script>
-import { getCityAPI } from '@/api/city/city-api';
 
 export default {
   name: "BookList",
@@ -39,44 +77,14 @@ export default {
     return {
       loading: true,
       finished: false,
-      cityList: [
-        { id: 1, name: '长沙'},
-        { id: 2, name: '怀化'},
-        { id: 3, name: '株洲'},
-        { id: 4, name: '衡阳'},
-        { id: 5, name: '邵阳'},
-        { id: 6, name: '湘潭'},
-        { id: 7, name: '常德'},
-        { id: 8, name: '常德'},
-        { id: 9, name: '常德'},
-        { id: 10, name: '常德'},
-        { id: 11, name: '常德'},
-        { id: 12, name: '常德'},
-        { id: 13, name: '常德'},
-        { id: 14, name: '常德'},
-        { id: 15, name: '常德'},
-        { id: 16, name: '常德'},
-        { id: 17, name: '常德'},
-        { id: 18, name: '常德'},
-        { id: 19, name: '常德'},
-        { id: 20, name: '常德'},
-        { id: 21, name: '常德'},
-        { id: 22, name: '常德'},
-      ]
+      isLoading: false,
+      cityList: [],
+      books: [1,2,3,4,5,6,7,8,9,10,1,1,12,3,1]
     }
   },
   methods: {
     async getCity() {
-      console.log('开始请求IP地址');
-      const {data: res } = await getCityAPI();
-      const newCity = [];
-      const city = { id: 23, name: res.info.city}
-      newCity.push(city);
-      this.cityList = [...this.cityList,...newCity];
       this.loading = false;
-      if (this.cityList.length > 30) {
-        this.finished = true;
-      }
     },
     onLoad() {
       this.getCity();
@@ -86,6 +94,10 @@ export default {
     },
     onClickRight() {
       this.$router.replace("/home");
+    },
+    onRefresh() {
+      console.log('触发了下拉刷新');
+      this.isLoading = false;
     }
   },
   props: {
@@ -121,5 +133,34 @@ export default {
 /deep/ .van-icon-wap-home-o {
   color: #ffffff;
   font-size: 20px !important;
+}
+
+.list-area {
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  background-color: cadetblue;
+}
+
+.head-tag {
+  height: 30px;
+  background-color: #FFFFF0;
+  .van-row {
+    height: 30px;
+    line-height: 30px;
+  }
+}
+
+.bookList {
+  .book {
+    background-color: #FFFAFA;
+  }
+  .van-col:nth-child(1) a {
+    color: #FF8945;
+  }
+
+  .van-col:last-child {
+    color: #dddddd;
+  }
 }
 </style>

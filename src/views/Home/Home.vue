@@ -33,7 +33,6 @@
 // 第一种方式导入图片
 import bg1 from '@/assets/images/bg1.png';
 import _ from 'lodash';
-import {getCityAPI} from '@/api/city/city-api';
 import Manage from '@/components/Manage/Manage.vue';
 
 let fn = null;

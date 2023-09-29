@@ -12,17 +12,6 @@
           </div>
         </div>
       </van-col>
-<!--      <van-col span="12">
-        <div class="link">
-          <router-link :to="toPath">{{ title }}</router-link>
-        </div>
-        <div class="total">
-          <div>
-            <span>书籍总数</span>
-            <span>• 9999</span>
-          </div>
-        </div>
-      </van-col>-->
     </van-row>
   </div>
 </template>
@@ -78,7 +67,6 @@ export default {
 }
 
 .total span:nth-child(2) {
-
   color: #ff7c2d;
 }
 </style>
