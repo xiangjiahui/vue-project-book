@@ -58,7 +58,6 @@ export default {
 }
 
 .van-col {
-  border-right: 1px solid #dddddd;
   border-bottom: 1px solid #dddddd;
 }
 

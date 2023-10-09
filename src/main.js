@@ -7,10 +7,14 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import '@/assets/init.css';
 import { Sticky } from 'vant';
+import { Search } from 'vant';
+import { Toast } from 'vant';
 
 Vue.use(Sticky);
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+Vue.use(Search)
+Vue.use(Toast)
 
 Vue.config.productionTip = false
 

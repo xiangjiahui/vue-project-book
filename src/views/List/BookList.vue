@@ -15,7 +15,7 @@
 
     <van-sticky :offset-top="46">
       <div class="list-area">
-        <p style="font-size: 20px;margin-bottom: 0">常规分区</p>
+        <p style="font-size: 20px;margin-bottom: 0">{{ this.$route.query.titleName }}-{{this.$route.params.id}}</p>
       </div>
     </van-sticky>
 
@@ -78,7 +78,6 @@ export default {
       loading: true,
       finished: false,
       isLoading: false,
-      cityList: [],
       books: [1,2,3,4,5,6,7,8,9,10,1,1,12,3,1]
     }
   },

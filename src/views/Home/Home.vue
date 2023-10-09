@@ -54,17 +54,17 @@ export default {
       ],
       rows: [
         { cols: [
-            { title: '常规书籍', toPath: '/list/common', id: 'common'},
-            { title: '纯爱书籍', toPath: '/list/love', id: 'love'}
+            { title: '常规书籍', toPath: '/list/common?titleName=常规书籍', id: 'common'},
+            { title: '纯爱书籍', toPath: '/list/love?titleName=纯爱书籍', id: 'love'}
           ]
         },
         { cols: [
-            { title: '牛头人书籍', toPath: '/list/ntr', id: 'ntr'},
-            { title: '轻小说书籍', toPath: '/list/light-novel', id: 'light-novel'}
+            { title: '牛头人书籍', toPath: '/list/ntr?titleName=牛头人书籍', id: 'ntr'},
+            { title: '轻小说书籍', toPath: '/list/light-novel?titleName=轻小说书籍', id: 'light-novel'}
           ]
         },
         { cols: [
-            { title: '废卢书籍', toPath: '/list/feilu', id: 'feilu'},
+            { title: '废卢书籍', toPath: '/list/feilu?titleName=废卢书籍', id: 'feilu'},
             { title: '书籍上传', toPath: '/upload', id: 'upload'},
           ]
         }
