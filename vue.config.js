@@ -40,5 +40,9 @@ module.exports = defineConfig({
         // Or if using full build of Vue (runtime + compiler)
         // path.resolve(__dirname, 'node_modules/vue/dist/vue.esm.js')
     )
+  },
+  // proxy跨域代理
+  devServer: {
+    proxy: 'https://www.shanhai.com'
   }
 })
