@@ -42,7 +42,7 @@ module.exports = defineConfig({
     )
   },
   // proxy跨域代理
-  devServer: {
-    proxy: 'https://www.shanhai.com'
-  }
+  // devServer: {
+  //   proxy: 'https://www.shanhai.com'
+  // }
 })

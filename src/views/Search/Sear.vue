@@ -11,10 +11,26 @@
     >
       <template #action>
         <div @click="searchBook">
-          搜索
+          <van-button type="info" size="small"
+                      icon="search">搜索</van-button>
         </div>
       </template>
     </van-search>
+
+    <div class="book-list" v-for="(item,index) in books" :key="index">
+      <router-link to="/">
+        牧神记&nbsp;&nbsp;作者:宅猪
+      </router-link>
+    </div>
+    <van-pagination v-model="currentPage" :total-items="125" :show-page-size="5">
+      <template #prev-text>
+        <van-icon name="arrow-left" />
+      </template>
+      <template #next-text>
+        <van-icon name="arrow" />
+      </template>
+      <template #page="{ text }">{{ text }}</template>
+    </van-pagination>
   </div>
 </template>
 
@@ -25,15 +41,18 @@ export default {
   data() {
     return {
       searchValue: '',
-      isSearch: false
+      isSearch: false,
+      books: [1,2,3,4,5,6,7,8,9,10,1,1],
+      currentPage: 1,
     }
   },
   methods: {
     onSearch(val) {
-      this.$toast.loading({
-        message: '正在搜索',
-        forbidClick: true
-      })
+      // this.$toast.loading({
+      //   message: '正在搜索书籍',
+      //   forbidClick: true
+      // })
+      this.searchBook();
     },
     async searchBook() {
       const {data: res} = await getCityAPI();
@@ -48,5 +67,22 @@ export default {
 
 /deep/ .van-nav-bar {
   background-color: #0FA5FF;
+}
+
+.book-list {
+  width: 360px;
+  height: 39px;
+  margin-left: 14px;
+  padding-top: 6px;
+  border-bottom: 1px solid #dddddd;
+
+  a {
+    float: left;
+    color: #333333;
+  }
+}
+
+/deep/ .van-pagination {
+  padding-left: 0;
 }
 </style>
