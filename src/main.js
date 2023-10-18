@@ -9,12 +9,15 @@ import '@/assets/init.css';
 import { Sticky } from 'vant';
 import { Search } from 'vant';
 import { Toast } from 'vant';
+import { Lazyload } from 'vant';
+
 
 Vue.use(Sticky);
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.use(Search)
 Vue.use(Toast)
+Vue.use(Lazyload)
 
 Vue.config.productionTip = false
 
