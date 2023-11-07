@@ -32,12 +32,20 @@
         </van-icon>
       </template>
     </van-nav-bar>
+
+    <van-nav-bar
+        left-text="退出登录"
+        class="list"
+    >
+      <template #right>
+        <van-icon name="arrow" size="18" @click="loginout">
+        </van-icon>
+      </template>
+    </van-nav-bar>
   </div>
 </template>
 
 <script>
-import Vue from "vue";
-
 export default {
   name: "User",
   data() {
@@ -49,6 +57,9 @@ export default {
   methods: {
     download() {
       this.$router.push('/home');
+    },
+    loginout() {
+      this.$router.replace('register');
     }
   }
 }

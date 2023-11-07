@@ -6,7 +6,7 @@
           name="username"
           label="用户名"
           placeholder="用户名"
-          :rules="[{ pattern ,message: '用户名只能输入1-9位的大小写英文字母' }]"
+          :rules="[{ pattern ,message: '用户名为1-9位的大小写英文字母' }]"
       />
       <van-field
           v-model="password"
@@ -17,7 +17,7 @@
           :rules="[{ validator, message: '密码错误' }]"
       />
       <div style="margin: 16px;">
-        <van-button round block type="info" native-type="submit">注册</van-button>
+        <van-button round block type="info" native-type="submit" @click="register">注册</van-button>
       </div>
     </van-form>
   </div>
@@ -42,6 +42,9 @@ export default {
     },
     validator(val) {
       return /^[a-zA-Z0-9]{6,16}$/.test(val);
+    },
+    register() {
+      this.$router.replace('/home');
     }
   }
 }

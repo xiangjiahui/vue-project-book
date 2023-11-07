@@ -17,11 +17,11 @@
       </template>
     </van-search>
 
-    <div class="book-list" v-for="(item,index) in books" :key="index">
-      <router-link to="/">
-        牧神记&nbsp;&nbsp;作者:宅猪
-      </router-link>
-    </div>
+<!--    <div class="book-list" v-for="(item,index) in books" :key="index">-->
+<!--      <router-link to="/">-->
+<!--        牧神记&nbsp;&nbsp;作者:宅猪-->
+<!--      </router-link>-->
+<!--    </div>-->
     <van-pagination v-model="currentPage" :total-items="125" :show-page-size="5">
       <template #prev-text>
         <van-icon name="arrow-left" />
@@ -29,7 +29,7 @@
       <template #next-text>
         <van-icon name="arrow" />
       </template>
-      <template #page="{ text }">{{ text }}</template>
+<!--      <template #page="{ text }">{{ text }}</template>-->
     </van-pagination>
   </div>
 </template>
@@ -84,5 +84,11 @@ export default {
 
 /deep/ .van-pagination {
   padding-left: 0;
+}
+
+/deep/ .van-pagination {
+  position: absolute;
+  top: 625px;
+  left: 67px;
 }
 </style>

@@ -13,25 +13,6 @@
       </template>
     </van-nav-bar>
 
-    <van-sticky :offset-top="46">
-      <div class="list-area">
-        <p style="font-size: 20px;margin-bottom: 0">{{ this.$route.query.titleName }}-{{this.$route.params.id}}</p>
-      </div>
-    </van-sticky>
-
-    <van-sticky :offset-top="81">
-      <div class="head-tag">
-        <van-row>
-          <van-col span="5">名称</van-col>
-          <van-col span="5">用户</van-col>
-          <van-col span="5">时间</van-col>
-          <van-col span="5">分类</van-col>
-          <van-col span="4">下载</van-col>
-        </van-row>
-      </div>
-    </van-sticky>
-
-
     <!-- onLoad方法要想被触发,loading值必须是false -->
     <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
       <van-list
@@ -40,25 +21,22 @@
           finished-text="没有更多的数据了"
           @load="onLoad"
       >
-        <div class="bookList">
-          <div class="book" v-for="(item,index) in books" :key="index">
-            <van-row>
-              <van-col span="5">
-                <router-link to="/detail">牧神记</router-link>
-              </van-col>
-              <van-col span="5">admin</van-col>
-              <van-col span="5">20230929</van-col>
-              <van-col span="5">
-                <van-tag type="success">常规</van-tag>
-              </van-col>
-              <van-col span="4">
-                <van-tag color="#ffe1e1" text-color="#ad0000">999999</van-tag>
-              </van-col>
-            </van-row>
-            <van-divider
-                :style="{ color: '#1989fa', borderColor: '#C0C0C0' }"
-            >
-            </van-divider>
+        <div class="book">
+          <div class="content">
+            <div class="book-title">
+              <p>
+                <router-link to="/null">
+                  身为龙骑士的我,目标就是推倒公主?住住住住住护住宅和住
+                </router-link>
+              </p>
+            </div>
+            <div class="book-info">
+              <van-icon name="clock-o" />&nbsp;2023-09-01
+              <van-icon name="eye-o" /> 9999
+            </div>
+            <div class="book-img">
+              <img :src="img" alt="">
+            </div>
           </div>
         </div>
       </van-list>
@@ -78,7 +56,8 @@ export default {
       loading: true,
       finished: false,
       isLoading: false,
-      books: [1,2,3,4,5,6,7,8,9,10,1,1,12,3,1]
+      books: [1,2,3,4,5,6,7,8,9,10,1,1,12,3,1],
+      img: require('@/assets/images/bg1.png')
     }
   },
   methods: {
@@ -134,32 +113,54 @@ export default {
   font-size: 20px !important;
 }
 
-.list-area {
-  height: 35px;
-  line-height: 35px;
-  text-align: center;
-  background-color: cadetblue;
-}
+.book {
+  height: 100px;
+  background-color: floralwhite;
+  padding: 10px 0;
 
-.head-tag {
-  height: 30px;
-  background-color: #FFFFF0;
-  .van-row {
-    height: 30px;
-    line-height: 30px;
-  }
-}
+  .content {
+    position: relative;
+    height: 80px;
 
-.bookList {
-  .book {
-    background-color: #FFFAFA;
-  }
-  .van-col:nth-child(1) a {
-    color: #FF8945;
-  }
+    .book-img {
+      width: 80px;
+      height: 80px;
+      float: right;
+      margin-right: 40px;
 
-  .van-col:last-child {
-    color: #dddddd;
+      img {
+        width: 80px;
+        height: 80px;
+      }
+    }
+
+    .book-title {
+      width: 200px;
+      height: 64px;
+      float: left;
+      margin-left: 20px;
+
+      p {
+        font-size: 15px;
+        text-indent: 30px;
+        text-align: justify;
+        letter-spacing: 1px;
+        //超过盒子宽度自动换行
+        overflow-wrap: break-word;
+        a {
+          color: black;
+        }
+      }
+    }
+
+    .book-info {
+      position: absolute;
+      bottom: -10px;
+      left: 20px;
+      float: left;
+      font-size: 13px;
+      color: #999999;
+    }
   }
 }
 </style>
