@@ -34,6 +34,7 @@
 import bg1 from '@/assets/images/bg1.png';
 import _ from 'lodash';
 import Manage from '@/components/Manage/Manage.vue';
+import {getCityAPI} from '@/api/city/city-api';
 
 let fn = null;
 export default {
