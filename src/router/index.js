@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Login from '@/views/Login/Login.vue';
 import { Toast } from 'vant';
+import Upload from '@/views/Upload/Upload';
 
 // 解决路由守卫跳转时,页面的DOM未渲染完成会报错的问题,重写router的push方法
 const originalPush = VueRouter.prototype.push
@@ -32,7 +33,8 @@ const routes = [
   { path: '/user', name: 'user', component: () => import('@/views/User/User.vue') },
   { path: '/list/:id', name: 'bookList', component: () => import ('@/views/List/BookList.vue'), props: true },
   { path: '/login', name: 'login', component: Login },
-  {path: '/register', name: 'register', component: () => import('@/views/Register/Register.vue') }
+  { path: '/register', name: 'register', component: () => import('@/views/Register/Register.vue') },
+  { path: '/upload', name: 'upload', component: Upload }
 ]
 
 const router = new VueRouter({
