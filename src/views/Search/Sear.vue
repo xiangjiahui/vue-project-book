@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { getCityAPI } from '@/api/city/city-api.js';
+
 export default {
   name: "Sear",
   data() {
@@ -47,16 +47,8 @@ export default {
     }
   },
   methods: {
-    onSearch(val) {
-      // this.$toast.loading({
-      //   message: '正在搜索书籍',
-      //   forbidClick: true
-      // })
-      this.searchBook();
-    },
-    async searchBook() {
-      const {data: res} = await getCityAPI();
-      console.log(res);
+    onSearch() {
+
     }
   }
 

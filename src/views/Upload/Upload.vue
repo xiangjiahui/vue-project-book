@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { uploadBook } from '@/api/default/api';
 export default {
   name: "Upload",
   data() {
@@ -26,12 +27,11 @@ export default {
   },
   methods: {
     startUpload() {
-      this.$toast.loading({
-        message: '文件开始上传',
-        duration: 1000
-      });
       const book = new FormData();
-      book.append('files',this.fileList);
+      this.fileList.forEach((file,index) => {
+        book.append('files',file.file);
+      })
+      uploadBook(book);
     }
   }
 }
