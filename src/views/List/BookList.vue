@@ -21,18 +21,18 @@
           finished-text="没有更多的数据了"
           @load="onLoad"
       >
-        <div class="book">
+        <div class="book" v-for="(item,index) in books" :data="item.oid">
           <div class="content">
             <div class="book-title">
               <p>
                 <router-link to="/null">
-                  身为龙骑士的我,目标就是推倒公主?住住住住住护住宅和住
+                  {{ item.name }}
                 </router-link>
               </p>
             </div>
             <div class="book-info">
-              <van-icon name="clock-o" />&nbsp;2023-09-01
-              <van-icon name="eye-o" /> 9999
+              <van-icon name="clock-o" />&nbsp;{{ item.formatTime }}
+              <van-icon name="eye-o" /> {{ item.downloadCount }}
             </div>
             <div class="book-img">
               <img :src="img" alt="">
@@ -45,27 +45,30 @@
 </template>
 
 <script>
-
+import { getBooks} from '@/api/default/api';
 export default {
   name: "BookList",
   created() {
     this.loading = false;
+    this.getBooks();
   },
   data() {
     return {
       loading: true,
       finished: false,
       isLoading: false,
-      books: [1,2,3,4,5,6,7,8,9,10,1,1,12,3,1],
+      books: [],
       img: require('@/assets/images/bg1.png')
     }
   },
   methods: {
-    async getCity() {
+    async getBooks() {
       this.loading = false;
+      const { data: res} = await getBooks()
+      this.books = res.data;
     },
     onLoad() {
-      this.getCity();
+      this.getBooks();
     },
     onClickLeft() {
       this.$router.back();
@@ -74,8 +77,9 @@ export default {
       this.$router.replace("/home");
     },
     onRefresh() {
-      console.log('触发了下拉刷新');
+      // console.log('触发了下拉刷新');
       this.isLoading = false;
+      this.getBooks();
     }
   },
   props: {
