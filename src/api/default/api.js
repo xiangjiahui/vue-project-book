@@ -42,3 +42,7 @@ export const uploadBook = function (files) {
 export const getBooks = function () {
     return defaultRequest.get('/file/getBooks');
 }
+
+ export const searchBook = function (searchName) {
+    return defaultRequest.get('/file/search');
+}

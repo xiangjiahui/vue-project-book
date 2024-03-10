@@ -17,6 +17,12 @@
       </template>
     </van-search>
 
+    <div class="search-result" v-if="isSearch">
+      <div class="sub">
+        结果: 找到"{{ searchValue }}"相关内容{{ resultNum }}个
+      </div>
+    </div>
+
 <!--    <div class="book-list" v-for="(item,index) in books" :key="index">-->
 <!--      <router-link to="/">-->
 <!--        牧神记&nbsp;&nbsp;作者:宅猪-->
@@ -35,7 +41,7 @@
 </template>
 
 <script>
-
+import { searchBook } from '@/api/default/api';
 export default {
   name: "Sear",
   data() {
@@ -44,10 +50,22 @@ export default {
       isSearch: false,
       books: [1,2,3,4,5,6,7,8,9,10,1,1],
       currentPage: 1,
+      searchName: '综漫:创建神级群聊',
+      resultNum: 999,
     }
   },
   methods: {
     onSearch() {
+
+    },
+    searchBook() {
+      // const { data: res} = await searchBook();
+      // let code = res.code;
+      // if (code !== 200){
+      //   this.searchName = '位置错误';
+      //   return;
+      // }
+      this.isSearch = true;
 
     }
   }
@@ -82,5 +100,31 @@ export default {
   position: absolute;
   top: 625px;
   left: 67px;
+}
+.search-result {
+  display: flex;
+  height: 40px;
+  line-height: 40px;
+  overflow: hidden;
+  background-color: #F1F1F1;
+  color: #006EDD;
+  text-align: center;
+
+  .sub {
+    font-size: 14px;
+    /* 让盒子的长度跟随文字的内容变化 */
+    width: 2ch; /* 假设每个字符宽度大约是1ch */
+    min-width: 320px; /* 设置最小宽度 */
+    white-space: nowrap; /* 防止文字换行 */
+    overflow: hidden; /* 超出部分隐藏 */
+    text-overflow: ellipsis; /* 超出部分显示省略号 */
+    height: 40px;
+    padding: 0 0 0 10px;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
 }
 </style>
