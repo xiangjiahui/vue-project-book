@@ -4,10 +4,11 @@
         title="书籍搜索"
     />
     <van-search
-        v-model="searchValue"
+        v-model.trim="name"
         show-action
         placeholder="请输入要搜索的书籍名称或作者名称"
         @search="onSearch"
+        @keyup.enter="enter"
     >
       <template #action>
         <div @click="searchBook">
@@ -19,15 +20,15 @@
 
     <div class="search-result" v-if="isSearch">
       <div class="sub">
-        结果: 找到"{{ searchValue }}"相关内容{{ resultNum }}个
+        结果: 找到"{{ name }}"相关内容{{ resultNum }}个
       </div>
     </div>
 
-<!--    <div class="book-list" v-for="(item,index) in books" :key="index">-->
-<!--      <router-link to="/">-->
-<!--        牧神记&nbsp;&nbsp;作者:宅猪-->
-<!--      </router-link>-->
-<!--    </div>-->
+    <div class="book-list" v-for="(item,index) in books" :key="item.userOID">
+      <router-link to="/">
+        {{ item.name }}
+      </router-link>
+    </div>
     <van-pagination v-model="currentPage" :total-items="125" :show-page-size="5">
       <template #prev-text>
         <van-icon name="arrow-left" />
@@ -48,25 +49,32 @@ export default {
     return {
       searchValue: '',
       isSearch: false,
-      books: [1,2,3,4,5,6,7,8,9,10,1,1],
+      books: [],
       currentPage: 1,
-      searchName: '综漫:创建神级群聊',
-      resultNum: 999,
+      name: '',
+      resultNum: 0,
     }
   },
   methods: {
     onSearch() {
-
+      this.searchBook();
     },
-    searchBook() {
-      // const { data: res} = await searchBook();
-      // let code = res.code;
-      // if (code !== 200){
-      //   this.searchName = '位置错误';
-      //   return;
-      // }
+    async searchBook() {
+      if (this.name === ''){
+        this.$toast.fail({
+          message: '搜索内容不能为空'
+        })
+        return;
+      }
+      const { data: res} = await searchBook(this.name);
+      let code = res.code;
+      if (code !== 200){
+        this.name = '未知错误';
+        return;
+      }
+      this.books = res.data;
+      this.resultNum = res.data.length;
       this.isSearch = true;
-
     }
   }
 

@@ -30,6 +30,9 @@ export default {
   },
   methods: {
 
+  },
+  mounted() {
+    this.$router.replace('/home');
   }
 }
 </script>

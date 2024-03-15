@@ -43,6 +43,10 @@ export const getBooks = function () {
     return defaultRequest.get('/file/getBooks');
 }
 
- export const searchBook = function (searchName) {
-    return defaultRequest.get('/file/search');
+ export const searchBook = function (name) {
+    return defaultRequest.get('/file/search',{
+        params: {
+            name: name
+        }
+    });
 }
