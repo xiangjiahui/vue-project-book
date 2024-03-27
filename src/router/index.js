@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Login from '@/views/Login/Login.vue';
-import { Toast } from 'vant';
+
 import Upload from '@/views/Upload/Upload';
+import Search from "@/views/Search/Search";
 
 // 解决路由守卫跳转时,页面的DOM未渲染完成会报错的问题,重写router的push方法
 const originalPush = VueRouter.prototype.push
@@ -29,7 +30,7 @@ const routes = [
   // { path: '/', redirect: '/home'},
   { path: '/home', name: 'home', component: () => import('@/views/Home/Home.vue'),
     meta: { isRecord: true, top: 0 }, },
-  { path: '/search', name: 'search', component: () => import('@/views/Search/Sear.vue') },
+  { path: '/search', name: 'search', component: Search },
   { path: '/user', name: 'user', component: () => import('@/views/User/User.vue') },
   { path: '/list/:id', name: 'bookList', component: () => import ('@/views/List/BookList.vue'), props: true },
   { path: '/login', name: 'login', component: Login },

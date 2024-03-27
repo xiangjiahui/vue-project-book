@@ -44,7 +44,7 @@
 <script>
 import { searchBook } from '@/api/default/api';
 export default {
-  name: "Sear",
+  name: "Search",
   data() {
     return {
       searchValue: '',
